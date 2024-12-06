@@ -9,10 +9,10 @@ import java.util.function.Consumer;
  * @author ilotterytea
  * @version 1.0
  */
-public class EventListener {
+public class EventManager {
     protected final ConcurrentHashMap<Class<? extends Event>, Consumer<? extends Event>> events;
 
-    public EventListener() {
+    public EventManager() {
         this.events = new ConcurrentHashMap<>();
     }
 
