@@ -36,7 +36,7 @@ public class EventManager {
      * @param <E>   Event
      * @return true if the event was successfully called, otherwise if the event was not registered or event does not have the same type as data.
      */
-    protected <E extends Event> boolean callEvent(Class<E> event, Object data) {
+    public <E extends Event> boolean callEvent(Class<E> event, Object data) {
         if (!this.events.containsKey(event)) return false;
 
         if (event.isInstance(data)) {
