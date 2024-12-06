@@ -14,6 +14,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("org.java-websocket:Java-WebSocket:$websocketVersion")
 }
 
 test {
