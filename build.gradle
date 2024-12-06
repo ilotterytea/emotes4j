@@ -16,6 +16,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("org.java-websocket:Java-WebSocket:$websocketVersion")
     implementation("com.google.code.gson:gson:$gsonVersion")
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
 }
 
 test {
