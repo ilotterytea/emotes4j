@@ -1,16 +1,22 @@
 package com.github.ilotterytea.emotes4j.betterttv.users;
 
+import com.github.ilotterytea.emotes4j.betterttv.emotes.Emote;
+
+import java.util.ArrayList;
+
 public class BetterTTVUser {
     private String id;
-    private String name;
-    private String displayName;
-    private String providerId;
+    private ArrayList<String> bots;
+    private String avatarUrl;
+    private ArrayList<Emote> channelEmotes;
+    private ArrayList<Emote> sharedEmotes;
 
-    public BetterTTVUser(String id, String name, String displayName, String providerId) {
+    public BetterTTVUser(String id, ArrayList<String> bots, String avatarUrl, ArrayList<Emote> channelEmotes, ArrayList<Emote> sharedEmotes) {
         this.id = id;
-        this.name = name;
-        this.displayName = displayName;
-        this.providerId = providerId;
+        this.bots = bots;
+        this.avatarUrl = avatarUrl;
+        this.channelEmotes = channelEmotes;
+        this.sharedEmotes = sharedEmotes;
     }
 
     public BetterTTVUser() {
@@ -20,15 +26,19 @@ public class BetterTTVUser {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<String> getBots() {
+        return bots;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public String getProviderId() {
-        return providerId;
+    public ArrayList<Emote> getChannelEmotes() {
+        return channelEmotes;
+    }
+
+    public ArrayList<Emote> getSharedEmotes() {
+        return sharedEmotes;
     }
 }

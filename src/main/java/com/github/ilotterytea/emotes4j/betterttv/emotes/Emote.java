@@ -1,13 +1,13 @@
 package com.github.ilotterytea.emotes4j.betterttv.emotes;
 
-import com.github.ilotterytea.emotes4j.betterttv.users.BetterTTVUser;
+import com.github.ilotterytea.emotes4j.betterttv.users.BetterTTVBaseUser;
 
 public class Emote extends EmoteBase {
     private String imageType;
     private Boolean animated;
-    private BetterTTVUser user;
+    private BetterTTVBaseUser user;
 
-    public Emote(String id, String code, String imageType, Boolean animated, BetterTTVUser user) {
+    public Emote(String id, String code, String imageType, Boolean animated, BetterTTVBaseUser user) {
         super(id, code);
         this.imageType = imageType;
         this.animated = animated;
@@ -25,7 +25,7 @@ public class Emote extends EmoteBase {
         return animated;
     }
 
-    public BetterTTVUser getUser() {
+    public BetterTTVBaseUser getUser() {
         return user;
     }
 }
