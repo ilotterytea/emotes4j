@@ -19,7 +19,7 @@ import java.net.URI;
 import java.util.Optional;
 
 
-public class SevenTVEventClient extends EventClient {
+public class SevenTVEventClient extends EventClient<String> {
     private final Logger log = LoggerFactory.getLogger(SevenTVEventClient.class);
 
     public SevenTVEventClient() {

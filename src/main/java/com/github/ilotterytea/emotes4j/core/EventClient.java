@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.TimerTask;
 
-public abstract class EventClient {
+public abstract class EventClient<D> {
     private final Logger log = LoggerFactory.getLogger(EventClient.class);
 
     protected final EventManager eventManager;
-    protected final HashMap<String, String> subscriptions;
+    protected final HashMap<String, D> subscriptions;
     protected WebSocketClient client;
 
     private int retryCounter;
@@ -30,7 +30,7 @@ public abstract class EventClient {
         return eventManager;
     }
 
-    public HashMap<String, String> getSubscriptions() {
+    public HashMap<String, D> getSubscriptions() {
         return subscriptions;
     }
 
