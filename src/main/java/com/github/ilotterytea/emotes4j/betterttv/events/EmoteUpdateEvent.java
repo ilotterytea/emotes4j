@@ -1,14 +1,17 @@
 package com.github.ilotterytea.emotes4j.betterttv.events;
 
+import com.github.ilotterytea.emotes4j.betterttv.emotes.Emote;
 import com.github.ilotterytea.emotes4j.betterttv.emotes.EmoteBase;
 import com.github.ilotterytea.emotes4j.core.Event;
 
 public class EmoteUpdateEvent extends Event {
-    private EmoteBase emote;
+    private Emote emote;
+    private Emote oldEmote;
     private String channel;
 
-    public EmoteUpdateEvent(EmoteBase emote, String channel) {
+    public EmoteUpdateEvent(Emote emote, Emote oldEmote, String channel) {
         this.emote = emote;
+        this.oldEmote = oldEmote;
         this.channel = channel;
     }
 
@@ -20,6 +23,10 @@ public class EmoteUpdateEvent extends Event {
         return emote;
     }
 
+    public Emote getOldEmote() {
+        return oldEmote;
+    }
+
     public String getChannel() {
         return channel;
     }
@@ -28,6 +35,7 @@ public class EmoteUpdateEvent extends Event {
     public String toString() {
         return "EmoteUpdateEvent{" +
                 "emote=" + emote +
+                ", oldEmote=" + oldEmote +
                 ", channel='" + channel + '\'' +
                 '}';
     }

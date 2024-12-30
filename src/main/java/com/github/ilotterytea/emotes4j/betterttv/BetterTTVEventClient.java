@@ -41,17 +41,61 @@ public class BetterTTVEventClient extends EventClient<ArrayList<Emote>> {
 
                 try {
                     JsonObject data = json.getAsJsonObject("data");
-                    Event event = switch (opName) {
+                    Event event;
+
+                    switch (opName) {
                         // Emote create
-                        case "emote_create" -> gson.fromJson(data, EmoteCreateEvent.class);
+                        case "emote_create": {
+                            EmoteCreateEvent e = gson.fromJson(data, EmoteCreateEvent.class);
+                            ArrayList<Emote> emotes = subscriptions.getOrDefault(e.getChannel(), new ArrayList<>());
+                            emotes.add(e.getEmote());
+                            subscriptions.put(e.getChannel(), emotes);
+                            event = e;
+                            break;
+                        }
                         // Emote update
-                        case "emote_update" -> gson.fromJson(data, EmoteUpdateEvent.class);
+                        case "emote_update": {
+                            String emoteId = data.get("emote").getAsJsonObject().get("id").getAsString();
+                            String emoteName = data.get("emote").getAsJsonObject().get("code").getAsString();
+                            String channel = data.get("channel").getAsString();
+                            ArrayList<Emote> emotes = subscriptions.getOrDefault(channel, new ArrayList<>());
+
+                            Optional<Emote> emote = emotes.stream().filter((x) -> x.getId().equals(emoteId)).findFirst();
+                            event = emote.map(value -> {
+                                Emote newValue = new Emote(
+                                        value.getId(),
+                                        emoteName,
+                                        value.getImageType(),
+                                        value.getAnimated(),
+                                        value.getUser()
+                                );
+                                emotes.remove(value);
+                                emotes.add(newValue);
+                                return new EmoteUpdateEvent(newValue, value, channel);
+                            }).orElse(null);
+                            break;
+                        }
                         // Emote delete
-                        case "emote_delete" -> gson.fromJson(data, EmoteDeleteEvent.class);
+                        case "emote_delete": {
+                            String emoteId = data.get("emoteId").getAsString();
+                            String channel = data.get("channel").getAsString();
+                            ArrayList<Emote> emotes = subscriptions.getOrDefault(channel, new ArrayList<>());
+
+                            Optional<Emote> emote = emotes.stream().filter((x) -> x.getId().equals(emoteId)).findFirst();
+                            event = emote.map(value -> {
+                                        emotes.remove(value);
+                                        return new EmoteDeleteEvent(value, channel);
+                                    }
+                            ).orElse(null);
+                            break;
+                        }
                         // Lookup user
                         //case "lookup_user" -> gson.fromJson(data, LookupUserEvent.class);
-                        default -> null;
-                    };
+                        default: {
+                            event = null;
+                            break;
+                        }
+                    }
 
                     if (event == null) {
                         return;
@@ -77,11 +121,14 @@ public class BetterTTVEventClient extends EventClient<ArrayList<Emote>> {
 
     @Override
     public boolean subscribeChannel(String userId) {
-        if (this.subscriptions.containsKey(userId)) return false;
+        if (this.subscriptions.containsKey("twitch:" + userId)) return false;
 
         // Syncing channel emotes
         Optional<BetterTTVUser> user = BetterTTVAPIClient.getTwitchUser(userId);
         if (user.isEmpty()) return false;
+
+        userId = "twitch:" + userId;
+        log.info("Subscribing to {}...", userId);
 
         ArrayList<Emote> emotes = new ArrayList<>();
         emotes.addAll(user.get().getChannelEmotes());
@@ -91,7 +138,7 @@ public class BetterTTVEventClient extends EventClient<ArrayList<Emote>> {
                 {
                     "name": "join_channel",
                     "data": {
-                        "name": "twitch:%s"
+                        "name": "%s"
                     }
                 }""", userId));
 
@@ -101,13 +148,15 @@ public class BetterTTVEventClient extends EventClient<ArrayList<Emote>> {
 
     @Override
     public boolean unsubscribeChannel(String userId) {
+        userId = "twitch:" + userId;
         if (!this.subscriptions.containsKey(userId)) return false;
+        log.info("Unsubscribing from {}...", userId);
 
         client.send(String.format("""
                 {
                     "name": "part_channel",
                     "data": {
-                        "name": "twitch:%s"
+                        "name": "%s"
                     }
                 }""", userId));
 

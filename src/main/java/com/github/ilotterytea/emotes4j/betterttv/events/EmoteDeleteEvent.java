@@ -1,21 +1,22 @@
 package com.github.ilotterytea.emotes4j.betterttv.events;
 
+import com.github.ilotterytea.emotes4j.betterttv.emotes.Emote;
 import com.github.ilotterytea.emotes4j.core.Event;
 
 public class EmoteDeleteEvent extends Event {
-    private String emoteId;
+    private Emote emote;
     private String channel;
 
-    public EmoteDeleteEvent(String emoteId, String channel) {
-        this.emoteId = emoteId;
+    public EmoteDeleteEvent(Emote emote, String channel) {
+        this.emote = emote;
         this.channel = channel;
     }
 
     public EmoteDeleteEvent() {
     }
 
-    public String getEmoteId() {
-        return emoteId;
+    public Emote getEmote() {
+        return emote;
     }
 
     public String getChannel() {
@@ -25,8 +26,8 @@ public class EmoteDeleteEvent extends Event {
     @Override
     public String toString() {
         return "EmoteDeleteEvent{" +
-                "emoteId='" + emoteId + '\'' +
+                "emote=" + emote +
                 ", channel='" + channel + '\'' +
-                "}";
+                '}';
     }
 }
