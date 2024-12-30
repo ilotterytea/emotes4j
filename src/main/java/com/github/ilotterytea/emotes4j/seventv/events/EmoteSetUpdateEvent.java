@@ -1,8 +1,8 @@
 package com.github.ilotterytea.emotes4j.seventv.events;
 
 import com.github.ilotterytea.emotes4j.core.Event;
-import com.github.ilotterytea.emotes4j.seventv.events.models.Actor;
-import com.github.ilotterytea.emotes4j.seventv.events.models.Emote;
+import com.github.ilotterytea.emotes4j.seventv.emotes.EventEmote;
+import com.github.ilotterytea.emotes4j.seventv.users.Actor;
 import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,18 +13,21 @@ public class EmoteSetUpdateEvent extends Event {
     private String emoteSetId;
     private Actor actor;
     @Nullable
-    private ArrayList<Emote> pulled;
+    private ArrayList<EventEmote> pulled;
     @Nullable
-    private ArrayList<Emote> pushed;
+    private ArrayList<EventEmote> pushed;
     @Nullable
-    private ArrayList<Emote> updated;
+    private ArrayList<EventEmote> updated;
 
-    public EmoteSetUpdateEvent(String emoteSetId, Actor actor, ArrayList<Emote> pulled, ArrayList<Emote> pushed, ArrayList<Emote> updated) {
+    public EmoteSetUpdateEvent(String emoteSetId, Actor actor, ArrayList<EventEmote> pulled, ArrayList<EventEmote> pushed, ArrayList<EventEmote> updated) {
         this.emoteSetId = emoteSetId;
         this.actor = actor;
         this.pulled = pulled;
         this.pushed = pushed;
         this.updated = updated;
+    }
+
+    public EmoteSetUpdateEvent() {
     }
 
     public String getEmoteSetId() {
@@ -36,17 +39,28 @@ public class EmoteSetUpdateEvent extends Event {
     }
 
     @Nullable
-    public ArrayList<Emote> getPulled() {
+    public ArrayList<EventEmote> getPulled() {
         return pulled;
     }
 
     @Nullable
-    public ArrayList<Emote> getPushed() {
+    public ArrayList<EventEmote> getPushed() {
         return pushed;
     }
 
     @Nullable
-    public ArrayList<Emote> getUpdated() {
+    public ArrayList<EventEmote> getUpdated() {
         return updated;
+    }
+
+    @Override
+    public String toString() {
+        return "EmoteSetUpdateEvent{" +
+                "emoteSetId='" + emoteSetId + '\'' +
+                ", actor=" + actor +
+                ", pulled=" + pulled +
+                ", pushed=" + pushed +
+                ", updated=" + updated +
+                '}';
     }
 }
