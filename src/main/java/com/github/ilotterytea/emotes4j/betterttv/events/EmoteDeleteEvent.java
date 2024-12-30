@@ -21,4 +21,12 @@ public class EmoteDeleteEvent extends Event {
     public String getChannel() {
         return channel;
     }
+
+    @Override
+    public String toString() {
+        return "EmoteDeleteEvent{" +
+                "emoteId='" + emoteId + '\'' +
+                ", channel='" + channel + '\'' +
+                "}";
+    }
 }

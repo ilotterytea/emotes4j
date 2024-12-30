@@ -41,4 +41,15 @@ public class BetterTTVUser {
     public ArrayList<Emote> getSharedEmotes() {
         return sharedEmotes;
     }
+
+    @Override
+    public String toString() {
+        return "BetterTTVUser{" +
+                "id='" + id + '\'' +
+                ", bots=" + bots +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", channelEmotes=" + channelEmotes +
+                ", sharedEmotes=" + sharedEmotes +
+                '}';
+    }
 }

@@ -78,4 +78,17 @@ public class User {
     public void setUser(SevenTVUser user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", platform='" + platform + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", linkedAt=" + linkedAt +
+                ", emoteSetId='" + emoteSetId + '\'' +
+                ", emoteSet=" + emoteSet +
+                ", user=" + user +
+                '}';
+    }
 }

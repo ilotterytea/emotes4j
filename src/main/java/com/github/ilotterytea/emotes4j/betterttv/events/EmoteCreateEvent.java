@@ -22,4 +22,12 @@ public class EmoteCreateEvent extends Event {
     public String getChannel() {
         return channel;
     }
+
+    @Override
+    public String toString() {
+        return "EmoteCreateEvent{" +
+                "emote=" + emote +
+                ", channel='" + channel + '\'' +
+                "}";
+    }
 }

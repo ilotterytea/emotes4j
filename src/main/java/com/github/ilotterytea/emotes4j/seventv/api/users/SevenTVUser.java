@@ -49,4 +49,14 @@ public class SevenTVUser {
     public void setConnections(List<UserConnection> connections) {
         this.connections = connections;
     }
+
+    @Override
+    public String toString() {
+        return "SevenTVUser{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", connections=" + connections +
+                '}';
+    }
 }

@@ -28,4 +28,15 @@ public class Emote extends EmoteBase {
     public BetterTTVBaseUser getUser() {
         return user;
     }
+
+    @Override
+    public String toString() {
+        return "Emote{" +
+                "code='" + code + '\'' +
+                ", id='" + id + '\'' +
+                ", user=" + user +
+                ", animated=" + animated +
+                ", imageType='" + imageType + '\'' +
+                "}";
+    }
 }

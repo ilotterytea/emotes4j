@@ -48,5 +48,15 @@ public class EmoteSet {
     public void setOwner(SevenTVUser owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "EmoteSet{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", emotes=" + emotes +
+                ", owner=" + owner +
+                '}';
+    }
 }
 

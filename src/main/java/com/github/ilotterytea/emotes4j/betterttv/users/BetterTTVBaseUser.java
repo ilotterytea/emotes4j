@@ -1,10 +1,10 @@
 package com.github.ilotterytea.emotes4j.betterttv.users;
 
 public class BetterTTVBaseUser {
-    private String id;
-    private String name;
-    private String displayName;
-    private String providerId;
+    protected String id;
+    protected String name;
+    protected String displayName;
+    protected String providerId;
 
     public BetterTTVBaseUser(String id, String name, String displayName, String providerId) {
         this.id = id;
@@ -30,5 +30,15 @@ public class BetterTTVBaseUser {
 
     public String getProviderId() {
         return providerId;
+    }
+
+    @Override
+    public String toString() {
+        return "BetterTTVBaseUser{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", providerId='" + providerId + '\'' +
+                '}';
     }
 }

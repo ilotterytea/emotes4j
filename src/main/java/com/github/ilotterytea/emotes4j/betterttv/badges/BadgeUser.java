@@ -16,4 +16,15 @@ public class BadgeUser extends BetterTTVBaseUser {
     public Badge getBadge() {
         return badge;
     }
+
+    @Override
+    public String toString() {
+        return "BadgeUser{" +
+                "badge=" + badge +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", providerId='" + providerId + '\'' +
+                "}";
+    }
 }

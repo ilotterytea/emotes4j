@@ -39,4 +39,13 @@ public class Badge {
     public BadgeType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "Badge{" +
+                "description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

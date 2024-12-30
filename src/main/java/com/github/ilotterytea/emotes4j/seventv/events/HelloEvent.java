@@ -32,4 +32,13 @@ public class HelloEvent extends Event {
     public String getSessionId() {
         return sessionId;
     }
+
+    @Override
+    public String toString() {
+        return "HelloEvent{" +
+                "heartbeatInterval=" + heartbeatInterval +
+                ", subscriptionLimit=" + subscriptionLimit +
+                ", sessionId='" + sessionId + '\'' +
+                '}';
+    }
 }

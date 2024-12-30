@@ -8,11 +8,18 @@ public class HeartbeatEvent extends Event {
     public HeartbeatEvent(Integer count) {
         this.count = count;
     }
-    
+
     public HeartbeatEvent() {
     }
 
     public Integer getCount() {
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return "HeartbeatEvent{" +
+                "count=" + count +
+                '}';
     }
 }

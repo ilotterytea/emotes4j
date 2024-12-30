@@ -68,4 +68,16 @@ public class UserConnection {
     public void setEmoteSet(EmoteSet emoteSet) {
         this.emoteSet = emoteSet;
     }
+
+    @Override
+    public String toString() {
+        return "UserConnection{" +
+                "id='" + id + '\'' +
+                ", platform='" + platform + '\'' +
+                ", username='" + username + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", emoteSetId='" + emoteSetId + '\'' +
+                ", emoteSet=" + emoteSet +
+                '}';
+    }
 }

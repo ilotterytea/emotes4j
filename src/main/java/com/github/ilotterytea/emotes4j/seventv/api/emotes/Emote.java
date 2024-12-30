@@ -38,4 +38,13 @@ public class Emote {
     public void setActorId(String actorId) {
         this.actorId = actorId;
     }
+
+    @Override
+    public String toString() {
+        return "Emote{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", actorId='" + actorId + '\'' +
+                '}';
+    }
 }
