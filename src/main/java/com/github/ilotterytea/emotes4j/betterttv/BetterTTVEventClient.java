@@ -1,8 +1,10 @@
 package com.github.ilotterytea.emotes4j.betterttv;
 
+import com.github.ilotterytea.emotes4j.betterttv.emotes.Emote;
 import com.github.ilotterytea.emotes4j.betterttv.events.EmoteCreateEvent;
 import com.github.ilotterytea.emotes4j.betterttv.events.EmoteDeleteEvent;
 import com.github.ilotterytea.emotes4j.betterttv.events.EmoteUpdateEvent;
+import com.github.ilotterytea.emotes4j.betterttv.users.BetterTTVUser;
 import com.github.ilotterytea.emotes4j.core.Event;
 import com.github.ilotterytea.emotes4j.core.EventClient;
 import com.google.gson.Gson;
@@ -14,9 +16,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
-public class BetterTTVEventClient extends EventClient {
+public class BetterTTVEventClient extends EventClient<ArrayList<Emote>> {
     private final Logger log = LoggerFactory.getLogger(BetterTTVEventClient.class);
 
     public BetterTTVEventClient() {
@@ -75,6 +79,14 @@ public class BetterTTVEventClient extends EventClient {
     public boolean subscribeChannel(String userId) {
         if (this.subscriptions.containsKey(userId)) return false;
 
+        // Syncing channel emotes
+        Optional<BetterTTVUser> user = BetterTTVAPIClient.getTwitchUser(userId);
+        if (user.isEmpty()) return false;
+
+        ArrayList<Emote> emotes = new ArrayList<>();
+        emotes.addAll(user.get().getChannelEmotes());
+        emotes.addAll(user.get().getSharedEmotes());
+
         client.send(String.format("""
                 {
                     "name": "join_channel",
@@ -83,7 +95,7 @@ public class BetterTTVEventClient extends EventClient {
                     }
                 }""", userId));
 
-        this.subscriptions.put(userId, userId);
+        this.subscriptions.put(userId, emotes);
         return true;
     }
 
